@@ -4,19 +4,21 @@ const ul = document.querySelector('.gallery');
 
 ul.addEventListener('click', (event) => {
     event.preventDefault();
-    const urlBig = event.target.getAttribute('data-source');
+    if (event.target.nodeName === 'IMG') {
+        const urlBig = event.target.getAttribute('data-source');
 
-    const instance = basicLightbox.create(`
+        const instance = basicLightbox.create(`
     <img src="${urlBig}">
 `);
 
-    instance.show();
+        instance.show();
 
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            instance.close();
-        }
-    });
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                instance.close();
+            }
+        });
+    }
 });
 
 const imgArr = galleryItems.map(({ preview, original, description }) => {
