@@ -32,7 +32,3 @@ const imgArr = galleryItems.map(({ preview, original, description }) => {
   </li>`;
 });
 ul.insertAdjacentHTML('beforeend', imgArr.join('\n'));
-
-// const galleryLink = document.querySelector('.gallery__link');
-
-// console.log(galleryItems);
