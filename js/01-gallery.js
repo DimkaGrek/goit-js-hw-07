@@ -7,19 +7,29 @@ ul.addEventListener('click', (event) => {
     if (event.target.nodeName === 'IMG') {
         const urlBig = event.target.getAttribute('data-source');
 
-        const instance = basicLightbox.create(`
-    <img src="${urlBig}">
-`);
+        const instance = basicLightbox.create(`<img src="${urlBig}">`, {
+            onShow: (instance) => {
+                window.addEventListener('keydown', (e) => {
+                    onEscClick(e, instance);
+                });
+            },
+            onClose: (instance) => {
+                window.removeEventListener('keydown', (e) => {
+                    onEscClick(e, instance);
+                });
+            },
+        });
 
         instance.show();
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                instance.close();
-            }
-        });
     }
 });
+
+function onEscClick(e, instance) {
+    if (e.key === 'Escape') {
+        instance.close();
+    }
+    return;
+}
 
 const imgArr = galleryItems.map(({ preview, original, description }) => {
     return `<li class="gallery__item">

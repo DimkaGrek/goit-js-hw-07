@@ -12,18 +12,8 @@ const imgArr = galleryItems.map(({ preview, original, description }) => {
 });
 ul.insertAdjacentHTML('beforeend', imgArr.join('\n'));
 
-const gallery = new SimpleLightbox('.gallery a', {
+new SimpleLightbox('.gallery a', {
     captions: true,
     captionsData: 'alt',
     captionDelay: 250,
-});
-
-ul.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    if (!gallery.visible()) {
-        gallery.open();
-    } else {
-        gallery.close();
-    }
 });
